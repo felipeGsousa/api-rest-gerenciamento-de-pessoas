@@ -21,6 +21,6 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<?> createPerson(@RequestBody Person person){
         personRepository.save(person);
-        return new ResponseEntity<>(person, HttpStatus.CREATED)
+        return new ResponseEntity<>(person, HttpStatus.CREATED);
     }
 }
