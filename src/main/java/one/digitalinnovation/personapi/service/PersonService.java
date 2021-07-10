@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PersonService {
 
@@ -27,5 +30,10 @@ public class PersonService {
         personRepository.save(personToSave);
 
         return new ResponseEntity<>(personToSave, HttpStatus.CREATED);
+    }
+
+    public List<Person> listAll() {
+        List<Person> allPeople = personRepository.findAll();
+        return allPeople.stream().collect(Collectors.toList());
     }
 }
