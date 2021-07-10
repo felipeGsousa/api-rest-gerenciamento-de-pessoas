@@ -1,28 +1,27 @@
-package one.digitalinnovation.personapi.entity;
+package one.digitalinnovation.personapi.dto.request;
 
 import one.digitalinnovation.personapi.enums.PhoneType;
 
-import javax.persistence.*;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
-@Entity
-public class Phone {
+public class PhoneDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Enumerated
     private PhoneType type;
 
-    @Column(nullable = false)
+    @NotEmpty
+    @Size(min = 13, max = 14)
     private String number;
 
     @Deprecated
-    public Phone() {
+    public PhoneDTO() {
     }
 
-    public Phone(PhoneType type, String number) {
+    public PhoneDTO(PhoneType type, String number) {
         this.type = type;
         this.number = number;
     }

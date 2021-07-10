@@ -1,19 +1,9 @@
 package one.digitalinnovation.personapi.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Person {
 
@@ -30,9 +20,44 @@ public class Person {
     @Column(nullable = false, unique = true)
     private String cpf;
 
-    @Column
     private LocalDate birthDate;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<Phone> phones;
+
+    @Deprecated
+    public Person() {
+    }
+
+    public Person(String firstName, String lastName, String cpf, LocalDate birthDate, List<Phone> phones) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cpf = cpf;
+        this.birthDate = birthDate;
+        this.phones = phones;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
 }
