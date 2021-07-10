@@ -36,4 +36,9 @@ public class PersonController {
     public ResponseEntity<?> findById(@PathVariable Long id){
         return personService.findById(id);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long id){
+        return personService.deleteById(id);
+    }
 }

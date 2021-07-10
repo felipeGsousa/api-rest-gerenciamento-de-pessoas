@@ -43,4 +43,13 @@ public class PersonService {
         if(person.isPresent()) return new ResponseEntity<>(person.get(), HttpStatus.OK);
         return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
     }
+
+    public ResponseEntity<?> deleteById(Long id) {
+        Optional<Person> person = personRepository.findById(id);
+        if(person.isPresent()){
+            personRepository.delete(person.get());
+            return new ResponseEntity<>(person.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
+    }
 }
