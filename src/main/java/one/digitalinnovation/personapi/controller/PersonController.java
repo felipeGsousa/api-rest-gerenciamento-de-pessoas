@@ -37,6 +37,11 @@ public class PersonController {
         return personService.findById(id);
     }
 
+    @PutMapping(path = "{id}")
+    public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody @Valid PersonDTO personDTO){
+        return personService.updateById(id, personDTO);
+    }
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id){
         return personService.deleteById(id);

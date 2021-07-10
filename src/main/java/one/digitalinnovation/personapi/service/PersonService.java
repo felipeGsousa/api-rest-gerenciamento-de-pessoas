@@ -27,9 +27,7 @@ public class PersonService {
     public ResponseEntity<?> createPerson(@RequestBody PersonDTO personDTO){
 
         Person personToSave = personDTO.dtoToPerson();
-
         personRepository.save(personToSave);
-
         return new ResponseEntity<>(personToSave, HttpStatus.CREATED);
     }
 
@@ -49,6 +47,21 @@ public class PersonService {
         if(person.isPresent()){
             personRepository.delete(person.get());
             return new ResponseEntity<>(person.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
+    }
+
+    public ResponseEntity<?> updateById(Long id, PersonDTO personDTO) {
+        Optional<Person> personOptional = personRepository.findById(id);
+        if(personOptional.isPresent()){
+            Person person = personOptional.get();
+            person.setFirstName(personDTO.getFirstName());
+            person.setLastName(personDTO.getLastName());
+            person.setCpf(personDTO.getCpf());
+            person.setBirthDate(personDTO.getBirthDate());
+            person.setPhones(personDTO.getPhones());
+            personRepository.save(person);
+            return new ResponseEntity<>(person, HttpStatus.CREATED);
         }
         return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
     }

@@ -37,4 +37,12 @@ public class PhoneDTO {
     public String getNumber() {
         return number;
     }
+
+    public void setType(PhoneType type) {
+        this.type = type;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 }
