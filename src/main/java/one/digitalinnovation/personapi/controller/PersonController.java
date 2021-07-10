@@ -31,4 +31,9 @@ public class PersonController {
     public List<Person> listAll(){
         return personService.listAll();
     }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<?> findById(@PathVariable Long id){
+        return personService.findById(id);
+    }
 }

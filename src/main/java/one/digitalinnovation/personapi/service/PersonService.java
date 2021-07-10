@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,5 +36,11 @@ public class PersonService {
     public List<Person> listAll() {
         List<Person> allPeople = personRepository.findAll();
         return allPeople.stream().collect(Collectors.toList());
+    }
+
+    public ResponseEntity<?> findById(Long id) {
+        Optional<Person> person = personRepository.findById(id);
+        if(person.isPresent()) return new ResponseEntity<>(person.get(), HttpStatus.OK);
+        return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
     }
 }
